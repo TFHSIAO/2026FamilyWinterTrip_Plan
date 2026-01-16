@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- 基本資訊 -->
-    <title>2026 家族旅行 - 冬季京阪五日遊 v1.74</title>
+    <title>2026 家族旅行 - 冬季京阪五日遊 v1.75</title>
     <meta name="description" content="2026 年 2 月日本關西家族旅行完整行程規劃，含交通、住宿、長輩友善安排與每日時間軸。" />
 
     <!-- Open Graph（LINE / Facebook / Messenger 會用） -->
@@ -69,6 +69,15 @@
             background-color: #e7e5e4; /* stone-200 */
             z-index: 0;
         }
+        .regulation-card {
+            @apply border border-stone-200 rounded-xl p-4 bg-white shadow-sm;
+        }
+        .regulation-title {
+            @apply font-bold text-lg mb-3 flex items-center gap-2;
+        }
+        .reg-list {
+            @apply list-disc list-outside ml-4 space-y-1 text-sm text-stone-600;
+        }
     </style>
 </head>
 
@@ -79,7 +88,7 @@
         <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
             <div>
                 <h1 class="text-xl md:text-2xl font-bold text-stone-900 tracking-tight">
-                    2026 家族旅行 - 冬季京阪五日遊 <span class="text-sm font-normal text-stone-400 ml-1">v1.74</span>
+                    2026 家族旅行 - 冬季京阪五日遊 <span class="text-sm font-normal text-stone-400 ml-1">v1.75</span>
                 </h1>
                 <p class="text-sm text-stone-500">2026/02/25 - 03/01 • 大阪 & 京都</p>
             </div>
@@ -96,6 +105,7 @@
                 <button onclick="switchTab('itinerary')" id="nav-itinerary" class="py-3 text-sm md:text-base whitespace-nowrap text-stone-500 transition-colors hover:text-amber-800">每日行程 Itinerary</button>
                 <button onclick="switchTab('logistics')" id="nav-logistics" class="py-3 text-sm md:text-base whitespace-nowrap text-stone-500 transition-colors hover:text-amber-800">住宿與交通 Info</button>
                 <button onclick="switchTab('stats')" id="nav-stats" class="py-3 text-sm md:text-base whitespace-nowrap text-stone-500 transition-colors hover:text-amber-800">預算與清單 Budget</button>
+                <button onclick="switchTab('regulations')" id="nav-regulations" class="py-3 text-sm md:text-base whitespace-nowrap text-stone-500 transition-colors hover:text-amber-800">法規須知 Regulations</button>
             </div>
         </nav>
     </header>
@@ -411,6 +421,64 @@
             </div>
         </section>
 
+        <!-- VIEW: REGULATIONS (NEW) -->
+        <section id="view-regulations" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100">
+                <h2 class="text-2xl font-bold mb-6 text-stone-800 border-b pb-2">⚖️ 海關與攜帶物品法規 (2026 最新)</h2>
+                
+                <div class="grid gap-6">
+                    <!-- Taiwan Outbound -->
+                    <div class="regulation-card border-l-4 border-indigo-500">
+                        <h3 class="regulation-title text-indigo-800">🇹🇼 台灣出境須知 (Taiwan Outbound)</h3>
+                        <ul class="reg-list">
+                            <li><span class="font-bold text-stone-800">現金限制：</span>新台幣 10 萬元、人民幣 2 萬元、外幣等值 1 萬美元 (超過需申報，未申報將沒入)。</li>
+                            <li><span class="font-bold text-stone-800">鋰電池/行動電源：</span><span class="text-red-600 font-bold">必須隨身攜帶</span>，嚴禁託運。單顆額定能量不超過 160Wh。</li>
+                            <li><span class="font-bold text-stone-800">液體 (手提)：</span>單瓶 < 100ml，需裝於 1 公升透明夾鏈袋。</li>
+                            <li><span class="font-bold text-stone-800">打火機：</span>限隨身攜帶 1 個 (傳統型)，藍焰防風型禁止攜帶。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Japan Entry/Outbound -->
+                    <div class="regulation-card border-l-4 border-teal-500">
+                        <h3 class="regulation-title text-teal-800">🇯🇵 日本入境與出境 (Japan Entry/Exit)</h3>
+                        <ul class="reg-list">
+                            <li><span class="font-bold text-stone-800">Visit Japan Web：</span>請務必於出發前完成填寫，一人一碼 (可合併家人)。</li>
+                            <li><span class="font-bold text-stone-800">現金限制：</span>攜帶超過 100 萬日圓 (或等值) 需申報。</li>
+                            <li><span class="font-bold text-stone-800">免稅品 (Tax Free)：</span><span class="text-red-600 font-bold">消耗品 (藥妝/零食)</span> 專用封口袋<span class="text-red-600">離開日本前不可拆封</span>，否則補繳 10% 稅金。</li>
+                            <li><span class="font-bold text-stone-800">禁止攜帶出境：</span>仿冒品、未打碼色情書刊。</li>
+                            <li><span class="font-bold text-stone-800">溫泉禮儀：</span>入池前務必沖洗身體、毛巾不可入水、長髮請盤起。刺青者建議使用私人湯屋 (但馬屋貸切溫泉OK)。</li>
+                            <li><span class="font-bold text-stone-800">電車禮儀：</span>車廂內請勿通話 (設為靜音)，且盡量避免飲食 (新幹線除外)。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Taiwan Inbound -->
+                    <div class="regulation-card border-l-4 border-red-500 bg-red-50">
+                        <h3 class="regulation-title text-red-800">🇹🇼 台灣入境須知 (Taiwan Inbound) ⚠️罰則極重</h3>
+                        <ul class="reg-list">
+                            <li><span class="font-bold text-stone-800">豬肉/肉製品：</span><span class="text-red-600 font-bold bg-white px-1 rounded">絕對禁止！</span>含火腿、培根、臘肉、肉鬆蛋捲、飛機餐沒吃完的肉。違者罰款 <span class="font-bold">20 萬元</span>起跳。</li>
+                            <li><span class="font-bold text-stone-800">新鮮蔬果/植物：</span>所有新鮮水果 (如日本草莓/蘋果)、蔬菜、種子禁止入境。</li>
+                            <li><span class="font-bold text-stone-800">電子菸/加熱菸：</span><span class="text-red-600 font-bold">全面禁止</span>攜帶入境 (含主機與煙彈)，違者最高罰 500 萬元。</li>
+                            <li><span class="font-bold text-stone-800">藥妝限制 (自用)：</span>
+                                <ul class="list-none ml-2 text-xs text-stone-600 mt-1">
+                                    <li>• <span class="font-bold">非處方藥 (成藥)</span>：每種最多 12 瓶 (盒/罐)，合計以 36 瓶 (盒/罐) 為限。
+                                        <div class="bg-amber-50 border border-amber-200 rounded p-2 mt-1 mb-1">
+                                            <span class="font-bold text-amber-800">💡 計算範例：</span><br>
+                                            新 LuLu 與大正感冒藥視為不同「種」，<span class="text-red-600 font-bold">分開計算</span> (各可帶 12 瓶)。<br>
+                                            但所有藥品 (LuLu + 大正 + EVE + 合利他命...) 加總<span class="text-red-600 font-bold">不可超過 36 瓶</span>。
+                                        </div>
+                                        <span class="text-red-700 font-bold">★ 熱門限制清單：</span>EVE 止痛藥、大正百保能 (Pabron)、新 LuLu 感冒藥、合利他命、Wakamoto、太田胃散...等皆算在此額度內。
+                                    </li>
+                                    <li>• <span class="font-bold">隱形眼鏡</span>：單一度數 60 片，每人限 1 種度數。</li>
+                                    <li>• <span class="font-bold">醫療器材</span>：如<span class="font-bold">液體 OK 繃</span>、醫用口罩、體溫計，原則上每種限帶 1 個 (自用合理數量內海關通常會放行，但勿大量囤貨)。</li>
+                                </ul>
+                            </li>
+                            <li><span class="font-bold text-stone-800">個人自用藥物：</span>若攜帶處方藥，建議保留藥袋或處方箋影本以備查驗。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -510,21 +578,29 @@
         const packingList = {
             carryOn: [
                 { name: "護照 (有效期6個月以上)", icon: "🛂" },
+                { name: "身份證/健保卡", icon: "🆔" },
                 { name: "日幣現金 & 信用卡", icon: "💴" },
                 { name: "Visit Japan Web截圖", icon: "📲" },
                 { name: "網卡/漫遊開通", icon: "📶" },
                 { name: "個人常備藥品", icon: "💊" },
                 { name: "行動電源（100Wh以下） & 充電線", icon: "🔋" },
                 { name: "手機", icon: "📱" },
+                { name: "耳機 (若有帶的話)", icon: "🎧" },
                 { name: "行李秤", icon: "⚖️" },
                 { name: "真空壓縮器", icon: "🌬️" },
-                { name: "口罩", icon: "😷" }
+                { name: "口罩", icon: "😷" },
+                { name: "蒸氣眼罩 (非必要)", icon: "😴" },
+                { name: "太陽眼鏡", icon: "🕶️" }
             ],
             checked: [
-                { name: "保暖衣物 (洋蔥式穿法)", icon: "🧥" },
+                { name: "上衣、褲子、內衣褲、襪子", icon: "👕" },
+                { name: "厚外套/羽絨衣、圍巾、手套、發熱衣", icon: "🧥" },
                 { name: "好走的鞋子", icon: "👟" },
                 { name: "環球影城門票 QR Code", icon: "🎟️" },
-                { name: "壓縮袋", icon: "🛍️" }
+                { name: "壓縮袋", icon: "🛍️" },
+                { name: "暖暖包", icon: "🔥" },
+                { name: "家鑰匙/車鑰匙", icon: "🔑" },
+                { name: "夾鍊袋數個", icon: "👝" }
             ]
         };
 
@@ -711,7 +787,7 @@
 
         function switchTab(tabId) {
             // Hide all views
-            ['overview', 'itinerary', 'logistics', 'stats'].forEach(id => {
+            ['overview', 'itinerary', 'logistics', 'stats', 'regulations'].forEach(id => {
                 document.getElementById(`view-${id}`).classList.add('hidden');
                 document.getElementById(`nav-${id}`).classList.remove('tab-active', 'text-amber-900', 'font-bold');
                 document.getElementById(`nav-${id}`).classList.add('text-stone-500');
