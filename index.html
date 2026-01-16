@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- 基本資訊 -->
-    <title>2026 家族旅行 - 冬季京阪五日遊 v1.72</title>
+    <title>2026 家族旅行 - 冬季京阪五日遊 v1.73</title>
     <meta name="description" content="2026 年 2 月日本關西家族旅行完整行程規劃，含交通、住宿、長輩友善安排與每日時間軸。" />
 
     <!-- Open Graph（LINE / Facebook / Messenger 會用） -->
@@ -79,13 +79,13 @@
         <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
             <div>
                 <h1 class="text-xl md:text-2xl font-bold text-stone-900 tracking-tight">
-                    2026 家族旅行 - 冬季京阪五日遊 <span class="text-sm font-normal text-stone-400 ml-1">v1.72</span>
+                    2026 家族旅行 - 冬季京阪五日遊 <span class="text-sm font-normal text-stone-400 ml-1">v1.73</span>
                 </h1>
                 <p class="text-sm text-stone-500">2026/02/25 - 03/01 • 大阪 & 京都</p>
             </div>
             <div class="hidden md:block">
                 <span id="countdown-badge" class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">
-                    倒數計時中...
+                    計算中...
                 </span>
             </div>
         </div>
@@ -110,7 +110,6 @@
                 <p class="text-stone-600 leading-relaxed">
                     這份互動式行程表整合了我們 2026 年 2 月底前往日本關西的所有細節。
                     請點選上方的「每日行程」查看詳細的時間安排，或在「住宿與交通」確認飯店資訊。
-                    目前距離出發還有 <span id="days-left" class="font-bold text-amber-600">--</span> 天！
                 </p>
             </div>
 
@@ -872,11 +871,17 @@
             const diff = target - now;
             const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
             
-            const displayDays = days > 0 ? days : 0;
-            document.getElementById('days-left').innerText = displayDays;
-            if(days <= 0) {
-                document.getElementById('countdown-badge').innerText = "旅程進行中！";
-                document.getElementById('countdown-badge').classList.add('bg-green-100', 'text-green-800');
+            // 更新 Header 的倒數標記
+            const badgeEl = document.getElementById('countdown-badge');
+            if (badgeEl) {
+                if(days <= 0) {
+                    badgeEl.innerText = "旅程進行中！";
+                    badgeEl.classList.remove('bg-amber-100', 'text-amber-800');
+                    badgeEl.classList.add('bg-green-100', 'text-green-800');
+                } else {
+                    // 修正倒數天數顯示格式
+                    badgeEl.innerText = `距離2/25出發日還有：${days}天`;
+                }
             }
         }
 
