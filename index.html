@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- 基本資訊 -->
-    <title>2026 家族旅行 - 冬季京阪五日遊 v1.73</title>
+    <title>2026 家族旅行 - 冬季京阪五日遊 v1.74</title>
     <meta name="description" content="2026 年 2 月日本關西家族旅行完整行程規劃，含交通、住宿、長輩友善安排與每日時間軸。" />
 
     <!-- Open Graph（LINE / Facebook / Messenger 會用） -->
@@ -79,7 +79,7 @@
         <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
             <div>
                 <h1 class="text-xl md:text-2xl font-bold text-stone-900 tracking-tight">
-                    2026 家族旅行 - 冬季京阪五日遊 <span class="text-sm font-normal text-stone-400 ml-1">v1.73</span>
+                    2026 家族旅行 - 冬季京阪五日遊 <span class="text-sm font-normal text-stone-400 ml-1">v1.74</span>
                 </h1>
                 <p class="text-sm text-stone-500">2026/02/25 - 03/01 • 大阪 & 京都</p>
             </div>
@@ -507,23 +507,26 @@
             }
         };
 
-        const packingItems = [
-            { name: "護照 (有效期6個月以上)", icon: "🛂" },
-            { name: "日幣現金 & 信用卡", icon: "💴" },
-            { name: "Visit Japan Web截圖", icon: "📲" },
-            { name: "網卡/漫遊開通", icon: "📶" },
-            { name: "個人常備藥品", icon: "💊" },
-            { name: "保暖衣物 (洋蔥式穿法)", icon: "🧥" },
-            { name: "好走的鞋子", icon: "👟" },
-            { name: "行動電源 & 充電線", icon: "🔋" },
-            { name: "環球影城門票 QR Code", icon: "🎟️" },
-            { name: "牙刷牙膏 (日本部分飯店不主動提供)", icon: "🦷" },
-            { name: "手機", icon: "📱" },
-            { name: "行李秤", icon: "⚖️" },
-            { name: "真空壓縮器 (需放隨身行李)", icon: "🌬️" },
-            { name: "壓縮袋", icon: "🛍️" },
-            { name: "口罩", icon: "😷" }
-        ];
+        const packingList = {
+            carryOn: [
+                { name: "護照 (有效期6個月以上)", icon: "🛂" },
+                { name: "日幣現金 & 信用卡", icon: "💴" },
+                { name: "Visit Japan Web截圖", icon: "📲" },
+                { name: "網卡/漫遊開通", icon: "📶" },
+                { name: "個人常備藥品", icon: "💊" },
+                { name: "行動電源（100Wh以下） & 充電線", icon: "🔋" },
+                { name: "手機", icon: "📱" },
+                { name: "行李秤", icon: "⚖️" },
+                { name: "真空壓縮器", icon: "🌬️" },
+                { name: "口罩", icon: "😷" }
+            ],
+            checked: [
+                { name: "保暖衣物 (洋蔥式穿法)", icon: "🧥" },
+                { name: "好走的鞋子", icon: "👟" },
+                { name: "環球影城門票 QR Code", icon: "🎟️" },
+                { name: "壓縮袋", icon: "🛍️" }
+            ]
+        };
 
         // --- CHART CONFIG ---
         function initCharts() {
@@ -849,17 +852,35 @@
 
         function renderPackingList() {
             const container = document.getElementById('packing-list-container');
-            container.innerHTML = packingItems.map((item, idx) => `
-                <label class="flex items-center space-x-3 p-3 bg-stone-50 rounded-lg cursor-pointer hover:bg-amber-50 transition">
+            let html = '';
+
+            // Render Carry-On
+            html += `<div class="mb-3"><h3 class="font-bold text-amber-700 text-sm mb-2 sticky top-0 bg-white py-1">🎒 隨身行李建議 (電池類必帶)</h3><div class="space-y-2">`;
+            html += packingList.carryOn.map((item) => `
+                <label class="flex items-center space-x-3 p-3 bg-stone-50 rounded-lg cursor-pointer hover:bg-amber-50 transition border border-stone-100">
                     <input type="checkbox" class="form-checkbox h-5 w-5 text-amber-600 rounded focus:ring-amber-500 border-stone-300" onchange="updatePackProgress()">
                     <span class="text-2xl">${item.icon}</span>
                     <span class="text-stone-700 font-medium">${item.name}</span>
                 </label>
             `).join('');
+            html += `</div></div>`;
+
+            // Render Checked
+            html += `<div class="mb-3"><h3 class="font-bold text-stone-700 text-sm mb-2 sticky top-0 bg-white py-1">🧳 託運行李建議</h3><div class="space-y-2">`;
+            html += packingList.checked.map((item) => `
+                <label class="flex items-center space-x-3 p-3 bg-stone-50 rounded-lg cursor-pointer hover:bg-stone-100 transition border border-stone-100">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-stone-500 rounded focus:ring-stone-400 border-stone-300" onchange="updatePackProgress()">
+                    <span class="text-2xl">${item.icon}</span>
+                    <span class="text-stone-700 font-medium">${item.name}</span>
+                </label>
+            `).join('');
+            html += `</div></div>`;
+
+            container.innerHTML = html;
         }
 
         function updatePackProgress() {
-            const total = packingItems.length;
+            const total = packingList.carryOn.length + packingList.checked.length;
             const checked = document.querySelectorAll('#packing-list-container input:checked').length;
             const pct = Math.round((checked / total) * 100);
             document.getElementById('pack-progress').innerText = `${pct}% 已完成`;
